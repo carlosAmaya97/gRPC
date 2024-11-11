@@ -1,10 +1,8 @@
 package com.uptc.frw.grpc.jpa.models;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
-public class Agencia {
+import java.util.List;
+
     @Entity
     @Table(name = "AGENCIAS")
     public class Agencia {
@@ -20,11 +18,56 @@ public class Agencia {
         private int anioCreacion;
 
         // Relación con Noticia_Agencia (OneToMany)
-        @OneToMany(mappedBy = "agencia", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        private List<NoticiaAgencia> noticias;
+        @ManyToMany
+        @JoinTable(
+                name = "NOTICIA_AGENCIA",
+                joinColumns = @JoinColumn(name = "ID_A") ,
+                inverseJoinColumns = @JoinColumn(name = "ID_N")
+        )
+        private List<Noticia> noticias;
 
+        public Agencia() {
+        }
 
+        public long getId() {
+            return id;
+        }
 
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public String getAgencia() {
+            return agencia;
+        }
+
+        public void setAgencia(String agencia) {
+            this.agencia = agencia;
+        }
+
+        public int getAnioCreacion() {
+            return anioCreacion;
+        }
+
+        public void setAnioCreacion(int anioCreacion) {
+            this.anioCreacion = anioCreacion;
+        }
+
+        public List<Noticia> getNoticias() {
+            return noticias;
+        }
+
+        public void setNoticias(List<Noticia> noticias) {
+            this.noticias = noticias;
+        }
+
+        @Override
+        public String toString() {
+            return "Agencia{" +
+                    "id=" + id +
+                    ", agencia='" + agencia + '\'' +
+                    ", anioCreacion=" + anioCreacion +
+                    '}';
+        }
     }
 
-}
