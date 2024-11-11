@@ -29,4 +29,55 @@ public class NoticiaAgencia {
     @JoinColumn(name = "ID_N")
     private Noticia noticia;
 
+    public NoticiaAgencia() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getIdAgencia() {
+        return idAgencia;
+    }
+
+    public void setIdAgencia(long idAgencia) {
+        this.idAgencia = idAgencia;
+    }
+
+    public Date getFechaAsignacion() {
+        return fechaAsignacion;
+    }
+
+    public void setFechaAsignacion(Date fechaAsignacion) {
+        this.fechaAsignacion = fechaAsignacion;
+    }
+
+    public Agencia getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(Agencia agencia) {
+        this.agencia = agencia;
+    }
+
+    public Noticia getNoticia() {
+        return noticia;
+    }
+
+    public void setNoticia(Noticia noticia) {
+        this.noticia = noticia;
+    }
+
+    @Override
+    public String toString() {
+        return "NoticiaAgencia{" +
+                "id=" + id +
+                ", idAgencia=" + idAgencia +
+                ", fechaAsignacion=" + fechaAsignacion +
+                '}';
+    }
 }
