@@ -42,7 +42,7 @@ message NoticiaAgencia {
 }
 
 // Mensajes para solicitudes y respuestas CRUD
-// Ejemplo para Noticias
+
 message NoticiaRequest {
   int64 id_n = 1;
 }
