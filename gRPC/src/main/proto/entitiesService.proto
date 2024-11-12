@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.tuempresa.servicio;
+package com.uptc.frw.grpc;
 
 // Para obtener las fechas
 import "google/protobuf/timestamp.proto";
@@ -67,7 +67,6 @@ message DeleteNoticiaRequest {
   int64 id_n = 1;
 }
 
-// Repite las estructuras de solicitudes y respuestas para las demás entidades
 message PeriodistaRequest {
   int64 id_p = 1;
 }
