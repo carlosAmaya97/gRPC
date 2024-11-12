@@ -12,7 +12,7 @@ public class Noticia {
     @Column(name = "ID_N")
     private long idN;
 
-    @Column(name = "ID_R")
+    @Column(name = "ID_R", insertable = false, updatable = false)
     private long idR;
 
     @Column(name = "FECHA_N")
@@ -25,15 +25,15 @@ public class Noticia {
     private String texto;
 
     // Relación con Periodista (muchos a muchos a través de tabla intermedia)
-    @ManyToMany(mappedBy = "noticia")
+    @ManyToMany(mappedBy = "noticias")
     private List<Periodista> periodistas;
 
     // Relación con Implicado (muchos a muchos a través de tabla intermedia)
-    @ManyToMany(mappedBy = "noticia")
+    @ManyToMany(mappedBy = "noticias")
     private List<Implicado> implicados;
 
     // Relación con Agencia (muchos a muchos a través de tabla intermedia)
-    @ManyToMany(mappedBy = "noticia")
+    @ManyToMany(mappedBy = "noticias")
     private List<Agencia> agencias;
 
     // Relacion consigo misma por ID_R
