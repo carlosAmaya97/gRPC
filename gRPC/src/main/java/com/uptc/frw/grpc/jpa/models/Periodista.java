@@ -31,7 +31,7 @@ public class Periodista {
     private List<Noticia> noticias;
 
     // Relación con Implicados (muchos a muchos a través de tabla intermedia)
-    @ManyToMany(mappedBy = "periodista")
+    @ManyToMany(mappedBy = "periodistas")
     private List<Implicado> implicados;
 
     public Periodista() {
