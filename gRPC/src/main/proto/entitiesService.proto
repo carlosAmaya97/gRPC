@@ -1,0 +1,208 @@
+syntax = "proto3";
+
+package com.tuempresa.servicio;
+
+// Para obtener las fechas
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// Mensajes de las entidades
+message Periodista {
+  int64 id_p = 1;
+  string nombre_p = 2;
+  string direccion = 3;
+  int64 telefono = 4;
+}
+
+message Noticia {
+  int64 id_n = 1;
+  int64 id_r = 2;
+  google.protobuf.Timestamp fecha_n = 3;
+  string titular = 4;
+  string texto = 5;
+}
+
+message Implicado {
+  int64 id_i = 1;
+  string nombre_i = 2;
+  google.protobuf.Timestamp f_nacimiento = 3;
+  string calidad = 4;
+}
+
+message Agencia {
+  int64 id_a = 1;
+  string agencia = 2;
+  int32 anio_c = 3;
+}
+
+message NoticiaAgencia {
+  int64 id_n = 1;
+  int64 id_a = 2;
+  google.protobuf.Timestamp fecha_a = 3;
+}
+
+// Mensajes para solicitudes y respuestas CRUD
+// Ejemplo para Noticias
+message NoticiaRequest {
+  int64 id_n = 1;
+}
+
+message NoticiaResponse {
+  Noticia noticia = 1;
+}
+
+message NoticiaListResponse {
+  repeated Noticia noticias = 1;
+}
+
+message CreateNoticiaRequest {
+  Noticia noticia = 1;
+}
+
+message UpdateNoticiaRequest {
+  Noticia noticia = 1;
+}
+
+message DeleteNoticiaRequest {
+  int64 id_n = 1;
+}
+
+// Repite las estructuras de solicitudes y respuestas para las demás entidades
+message PeriodistaRequest {
+  int64 id_p = 1;
+}
+
+message PeriodistaResponse {
+  Periodista periodista = 1;
+}
+
+message PeriodistaListResponse {
+  repeated Periodista periodistas = 1;
+}
+
+message CreatePeriodistaRequest {
+  Periodista periodista = 1;
+}
+
+message UpdatePeriodistaRequest {
+  Periodista periodista = 1;
+}
+
+message DeletePeriodistaRequest {
+  int64 id_p = 1;
+}
+
+message ImplicadoRequest {
+  int64 id_i = 1;
+}
+
+message ImplicadoResponse {
+  Implicado implicado = 1;
+}
+
+message ImplicadoListResponse {
+  repeated Implicado implicados = 1;
+}
+
+message CreateImplicadoRequest {
+  Implicado implicado = 1;
+}
+
+message UpdateImplicadoRequest {
+  Implicado implicado = 1;
+}
+
+message DeleteImplicadoRequest {
+  int64 id_i = 1;
+}
+
+message AgenciaRequest {
+  int64 id_a = 1;
+}
+
+message AgenciaResponse {
+  Agencia agencia = 1;
+}
+
+message AgenciaListResponse {
+  repeated Agencia agencias = 1;
+}
+
+message CreateAgenciaRequest {
+  Agencia agencia = 1;
+}
+
+message UpdateAgenciaRequest {
+  Agencia agencia = 1;
+}
+
+message DeleteAgenciaRequest {
+  int64 id_a = 1;
+}
+
+message NoticiaAgenciaRequest {
+  int64 id_n = 1;
+  int64 id_a = 2;
+}
+
+message NoticiaAgenciaResponse {
+  NoticiaAgencia noticia_agencia = 1;
+}
+
+message NoticiaAgenciaListResponse {
+  repeated NoticiaAgencia noticia_agencias = 1;
+}
+
+message CreateNoticiaAgenciaRequest {
+  NoticiaAgencia noticia_agencia = 1;
+}
+
+message UpdateNoticiaAgenciaRequest {
+  NoticiaAgencia noticia_agencia = 1;
+}
+
+message DeleteNoticiaAgenciaRequest {
+  int64 id_n = 1;
+  int64 id_a = 2;
+}
+
+// Servicios gRPC para cada entidad
+service NoticiaService {
+  rpc CreateNoticia(CreateNoticiaRequest) returns (NoticiaResponse);
+  rpc GetNoticia(NoticiaRequest) returns (NoticiaResponse);
+  rpc ListNoticias(google.protobuf.Empty) returns (NoticiaListResponse);
+  rpc UpdateNoticia(UpdateNoticiaRequest) returns (NoticiaResponse);
+  rpc DeleteNoticia(DeleteNoticiaRequest) returns (google.protobuf.Empty);
+}
+
+service PeriodistaService {
+  rpc CreatePeriodista(CreatePeriodistaRequest) returns (PeriodistaResponse);
+  rpc GetPeriodista(PeriodistaRequest) returns (PeriodistaResponse);
+  rpc ListPeriodistas(google.protobuf.Empty) returns (PeriodistaListResponse);
+  rpc UpdatePeriodista(UpdatePeriodistaRequest) returns (PeriodistaResponse);
+  rpc DeletePeriodista(DeletePeriodistaRequest) returns (google.protobuf.Empty);
+}
+
+service ImplicadoService {
+  rpc CreateImplicado(CreateImplicadoRequest) returns (ImplicadoResponse);
+  rpc GetImplicado(ImplicadoRequest) returns (ImplicadoResponse);
+  rpc ListImplicados(google.protobuf.Empty) returns (ImplicadoListResponse);
+  rpc UpdateImplicado(UpdateImplicadoRequest) returns (ImplicadoResponse);
+  rpc DeleteImplicado(DeleteImplicadoRequest) returns (google.protobuf.Empty);
+}
+
+service AgenciaService {
+  rpc CreateAgencia(CreateAgenciaRequest) returns (AgenciaResponse);
+  rpc GetAgencia(AgenciaRequest) returns (AgenciaResponse);
+  rpc ListAgencias(google.protobuf.Empty) returns (AgenciaListResponse);
+  rpc UpdateAgencia(UpdateAgenciaRequest) returns (AgenciaResponse);
+  rpc DeleteAgencia(DeleteAgenciaRequest) returns (google.protobuf.Empty);
+}
+
+service NoticiaAgenciaService {
+  rpc CreateNoticiaAgencia(CreateNoticiaAgenciaRequest) returns (NoticiaAgenciaResponse);
+  rpc GetNoticiaAgencia(NoticiaAgenciaRequest) returns (NoticiaAgenciaResponse);
+  rpc ListNoticiaAgencias(google.protobuf.Empty) returns (NoticiaAgenciaListResponse);
+  rpc UpdateNoticiaAgencia(UpdateNoticiaAgenciaRequest) returns (NoticiaAgenciaResponse);
+  rpc DeleteNoticiaAgencia(DeleteNoticiaAgenciaRequest) returns (google.protobuf.Empty);
+}
